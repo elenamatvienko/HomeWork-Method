@@ -6,12 +6,11 @@ public class Main {
         task1();
         task2();
         task3();
-
     }
 
     public static void task1() {
         System.out.println("Задача 1");
-        int year = 2021;
+        int year = 2004;
         defineLeapYear(year);
     }
 
@@ -25,14 +24,13 @@ public class Main {
 
     public static void task2() {
         System.out.println("Задача 2");
-        int currentYear = LocalDate.now().getYear();
         int clientOS = 1;
         int clientDeviceYear = 2018;
-        determineDevice(clientOS, clientDeviceYear, currentYear);
+        determineDevice(clientOS, clientDeviceYear);
     }
 
-    public static void determineDevice(int clientOS, int clientDeviceYear, int currentYear) {
-
+    public static void determineDevice(int clientOS, int clientDeviceYear) {
+        int currentYear = LocalDate.now().getYear();
         if (clientOS <= 0 && clientDeviceYear < currentYear) {
             System.out.println("Установите облегченную версию приложения для iOS по ссылке");
         } else if (clientOS >= 1 && clientDeviceYear < currentYear) {
@@ -48,19 +46,40 @@ public class Main {
     public static void task3() {
         System.out.println("Задача 3");
         int deliveryDistance = 95;
-        determineQuantityDays(deliveryDistance);
+        printQuantityDays(deliveryDistance);
     }
 
-    public static void determineQuantityDays(int deliveryDistance) {
-        if (deliveryDistance < 20) {
-            System.out.println("Доставка занимает один день.");
-        } else if (deliveryDistance >= 20 && deliveryDistance < 60) {
-            System.out.println("Доставка занимает два дня.");
-        } else if (deliveryDistance >= 60 && deliveryDistance < 100) {
-            System.out.println("Доставка занимает три дня.");
+    public static int calculateQuantityDays(int distance) {
+        int deliveryDays = 0;
+
+        if (distance <= 20) {
+            deliveryDays = 1;
+        } else if (distance <= 60) {
+            deliveryDays = 2;
+        } else if (distance <= 100) {
+            deliveryDays = 3;
+        } else {
+            deliveryDays = 0;
+        }
+        return deliveryDays;
+    }
+
+    public static void printQuantityDays(int distance) {
+        if (distance > 100) {
+            System.out.println("Доставка не осуществляется.");
+        } else {
+            System.out.println("Доставка занимает " + calculateQuantityDays(distance) + " дня.");
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
